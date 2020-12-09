@@ -9,12 +9,8 @@ public class App
         IDataHandler dataHandler = new FileHandler();
         dataHandler.open(args[0]);
         double exchangeRate = api.exchangeRateCalc(dataHandler.getCurrencyName(), dataHandler.getCurrencyName());
-        double currNumber;
-        while (dataHandler.hasData()) {
-            currNumber  = dataHandler.readQuantity();
-            System.out.println("OG Number: " + currNumber);
-            System.out.println("Converted Number: " + (exchangeRate * currNumber));
-        }
+        MoneyConverter.convertNumbers(exchangeRate, dataHandler);
         dataHandler.close();
+
     }
 }
