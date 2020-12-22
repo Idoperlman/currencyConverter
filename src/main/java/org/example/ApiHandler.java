@@ -15,14 +15,21 @@ public class ApiHandler {
         this.key = key;
     }
 
-    public double exchangeRateCalc(String fromCurrency, String toCurrency) throws IOException, InterruptedException {
+    public Double exchangeRateCalc(String fromCurrency, String toCurrency) {
         String url = this.baseURL + "/exchange?from=" + fromCurrency + "&to=" + toCurrency + "&q=1.0";
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .header("x-rapidapi-key", this.key)
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
-        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = null;
+        try {
+            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return Double.parseDouble(response.body());
     }
 

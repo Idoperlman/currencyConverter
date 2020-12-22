@@ -28,7 +28,7 @@ public class FileHandler implements IDataHandler {
     }
 
     @Override
-    public double readQuantity() {
+    public double getQuantity() {
         return this.input.nextDouble();
     }
 

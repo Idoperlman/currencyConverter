@@ -4,6 +4,6 @@ public interface IDataHandler {
     void open(String path);
     void close();
     String getCurrencyName();
-    double readQuantity();
+    double getQuantity();
     boolean hasData();
 }
